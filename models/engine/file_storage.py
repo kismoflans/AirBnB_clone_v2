@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""
-0x00. AirBnB clone - The console
-FileStorage class module
-"""
+"""This is the file storage class for AirBnB"""
 import json
 from models.base_model import BaseModel
 from models.user import User
@@ -14,59 +11,67 @@ from models.review import Review
 
 
 class FileStorage:
+    """This class serializes instances to a JSON file and
+    deserializes JSON file to instances
+    Attributes:
+        __file_path: path to the JSON file
+        __objects: objects will be stored
     """
-    Class that serializes object/instances to a JSON file
-    and deserializes JSON file to objects/instances
-    """
-
-    __file_path = 'file.json'
+    __file_path = "file.json"
     __objects = {}
-    className = {'BaseModel': BaseModel,
-                 'User': User,
-                 'State': State,
-                 'City': City,
-                 'Amenity': Amenity,
-                 'Place': Place,
-                 'Review': Review}
 
-    def all(self):
+    def delete(self, obj=None):
+        """deletes obj from __objects if it's inside
+        Args:
+            obj: given object
         """
-        function that returns the dictionary __objects
+        if not obj:
+            return
+        key = "{}.{}".format(type(obj).__name__, obj.id)
+        if key in self.__objects:
+            del self.__objects[key]
+            self.save()
+
+    def all(self, cls=None):
+        """returns a dictionary
+        Args:
+            cls: class type to filter return by
+        Return:
+            returns a dictionary of __object
         """
-        return FileStorage.__objects
+        if not cls:
+            return self.__objects
+        return {k: v for k, v in self.__objects.items() if type(v) == cls}
 
     def new(self, obj):
+        """sets __object to given obj
+        Args:
+            obj: given object
         """
-        function that sets in __objects the obj with key <obj class name>.id
-        """
-        key = '{}.{}'.format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        if obj:
+            key = "{}.{}".format(type(obj).__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
+        """serialize the file path to JSON file path
         """
-        function that serializes __objects to the JSON file
-        (path: __file_path); new_dict is a new dictionary in which
-        the objects/instances have been replaced by their respective
-        dictionary representation using the to_dict method from BaseModel
-        """
-        new_dict = {}
-        for key, obj in FileStorage.__objects.items():
-            new_dict[key] = obj.to_dict()
-        with open(FileStorage.__file_path, 'w') as f:
-            f.write(json.dumps(new_dict))
+        my_dict = {}
+        for key, value in self.__objects.items():
+            my_dict[key] = value.to_dict()
+        with open(self.__file_path, 'w', encoding="UTF-8") as f:
+            json.dump(my_dict, f)
 
     def reload(self):
-        """
-        function that deserializes the JSON file to __objects
+        """serialize the file path to JSON file path
         """
         try:
-            with open(FileStorage.__file_path, 'r') as f:
-                f_contents = f.read()
-                dict_obj_dicts = json.loads(f_contents)
-            for key in dict_obj_dicts.keys():
-                obj_dict = dict_obj_dicts[key]
-                # FileStorage.__objects[key] = BaseModel(**obj_dict)
-                FileStorage.__objects[key] = FileStorage\
-                           .className[key.split('.')[0]](**obj_dict)
+            with open(self.__file_path, 'r', encoding="UTF-8") as f:
+                for key, value in (json.load(f)).items():
+                    value = eval(value["__class__"])(**value)
+                    self.__objects[key] = value
         except FileNotFoundError:
             pass
+
+    def close(self):
+        """Reload to deserialize JSON file objects"""
+        self.reload()
