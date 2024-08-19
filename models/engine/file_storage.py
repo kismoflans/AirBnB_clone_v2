@@ -70,4 +70,3 @@ class FileStorage:
                            .className[key.split('.')[0]](**obj_dict)
         except FileNotFoundError:
             pass
-

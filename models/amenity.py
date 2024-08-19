@@ -17,4 +17,3 @@ class Amenity(BaseModel):
     # def __init__(self, *args, **kwargs):
     #     """initialize variables and methods"""
     #     super().__init__(self, *args, **kwargs)
-

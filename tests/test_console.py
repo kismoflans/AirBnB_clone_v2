@@ -12,4 +12,3 @@ from os import path, remove
 class TestConsole(unittest.TestCase):
     """define variables and methods"""
     pass
-

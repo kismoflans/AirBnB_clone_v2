@@ -325,4 +325,3 @@ class TestFileStorage(unittest.TestCase):
         self.assertEqual(FileStorage._FileStorage__objects
                          [re.__class__.__name__+'.'+re.id].to_dict(),
                          re.to_dict())
-
