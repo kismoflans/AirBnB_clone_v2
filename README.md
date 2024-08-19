@@ -1,1 +1,9 @@
-![Alt AirBnb](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fairbnb-shoelaces--235313149256362934%2F&psig=AOvVaw0N9OrA-3h8qyDqdPypF1xK&ust=1724134303103000&source=images&cd=vfe&opi=89978449&ved=0CA4QjRxqFwoTCIi8uPiygIgDFQAAAAAdAAAAABAE)
+# Project: AirBnB Clone (@Holberton)
+
+<p align='center'>
+  <img src="https://github.com/jarehec/AirBnB_clone_v3/blob/master/dev/HBTN-hbnb-Final.png" width="360" height=auto />
+</p>
+
+- This repository covers Part 1 & Part 2 of an AirBnB Clone project in Python/Flask.
+
+-  The full-stack project is divided into 7 Parts:
