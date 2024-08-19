@@ -87,7 +87,9 @@ class TestConsole(unittest.TestCase):
             user_id = f.getvalue().strip()
 
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd(f'update User {user_id} email "test@example.com"')
+            HBNBCommand().onecmd(
+                f'update User {user_id} email "test@example.com"'
+            )
             output = f.getvalue().strip()
 
         with patch('sys.stdout', new=StringIO()) as f:
