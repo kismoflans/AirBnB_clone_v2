@@ -302,4 +302,4 @@ Otherwise, you will have to re-write the console by replacing precmd by default.
 Well done on completing this project! Let the world hear about this milestone achieved.
 
 ##### AUTHORS
-[Amos Kiplimo Linkedin](www.linkedin.com/in/amos-kipkemei-415539214)
+![Linkedin Amos Kiplimo] (http://www.linkedin.com/in/amos-kipkemei-415539214)
