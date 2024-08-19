@@ -294,9 +294,12 @@ rite all unittests for console.py, all features!
 
 For testing the console, you should “intercept” STDOUT of it, we highly recommend you to use:
 
-```with patch('sys.stdout', new=StringIO()) as f:
-    HBNBCommand().onecmd("help show")```
+```with patch('sys.stdout', new=StringIO()) as f:```
+  ```HBNBCommand().onecmd("help show")```
   
 Otherwise, you will have to re-write the console by replacing precmd by default.
 
 Well done on completing this project! Let the world hear about this milestone achieved.
+
+##### AUTHORS
+[Amos Kiplimo Linkedin](www.linkedin.com/in/amos-kipkemei-415539214)
