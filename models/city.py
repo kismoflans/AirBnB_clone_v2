@@ -1,17 +1,8 @@
-<<<<<<< HEAD
-models/base_model.py!/usr/bin/python3
-"""
-0x00. AirBnB clone - The console
-City module
-"""
-from models.base_model import BaseModel
-=======
 #!/usr/bin/python3
 """This is the city class"""
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship, backref
->>>>>>> 09fbc4501e62544f8fa5efde4b7a0da1805751fd
 
 
 class City(BaseModel, Base):
