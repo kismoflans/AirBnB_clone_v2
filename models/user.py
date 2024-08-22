@@ -1,22 +1,33 @@
 #!/usr/bin/python3
-"""
-0x00. AirBnB clone - The console
-User module
-"""
-from models.base_model import BaseModel
+"""This is the user class"""
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship, backref
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
+    """This is the class for user
+    Attributes:
+        email: email address
+        password: password for you login
+        first_name: first name
+        last_name: last name
     """
-    Defines attributes/methods for the User class, subclass of BaseModel
-    Other attributes/methods are inherited from BaseModel
-    """
-
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
-
-    # def __init__(self, *args, **kwargs):
-    #     """initialize variables and methods"""
-    #     super().__init__(self, *args, **kwargs)
+    __tablename__ = "users"
+    email = Column(String(128), nullable=False)
+    password = Column(String(128), nullable=False)
+    first_name = Column(String(128), nullable=True)
+    last_name = Column(String(128), nullable=True)
+    places = relationship(
+        "Place",
+        cascade="all,delete",
+        backref=backref("user", cascade="all,delete"),
+        passive_deletes=True,
+        single_parent=True)
+    # TODO: wtf single_parent
+    reviews = relationship(
+        "Review",
+        cascade="all,delete",
+        backref=backref("user", cascade="all,delete"),
+        passive_deletes=True,
+        single_parent=True)

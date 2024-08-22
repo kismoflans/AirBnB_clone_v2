@@ -1,19 +1,24 @@
 #!/usr/bin/python3
-"""
-0x00. AirBnB clone - The console
-Amenity module
-"""
-from models.base_model import BaseModel
+"""This is the amenity class"""
+from models.base_model import BaseModel, Base
+from models.place import Place
+from sqlalchemy import Column, String, Table, ForeignKey
+from sqlalchemy.orm import relationship
+from os import getenv
 
 
-class Amenity(BaseModel):
+class Amenity(BaseModel, Base):
+    """This is the class for Amenity
+    Attributes:
+        name: input name
     """
-    Defines attributes/methods for the Amenity class, subclass of BaseModel
-    Other attributes/methods are inherited from BaseModel
-    """
+    __tablename__ = "amenities"
+    name = Column(String(128),
+                  nullable=False)
 
-    name = ""
-
-    # def __init__(self, *args, **kwargs):
-    #     """initialize variables and methods"""
-    #     super().__init__(self, *args, **kwargs)
+    if getenv("HBNB_TYPE_STORAGE") == "db":
+        place_amenities = relationship(
+            "Place",
+            secondary="place_amenity",
+            viewonly=False,
+            back_populates="amenities")
