@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+models/base_model.py!/usr/bin/python3
 """
 0x00. AirBnB clone - The console
 City module
